@@ -127,6 +127,15 @@
 body {
   font-family: 'Fixel Text', sans-serif;
 }
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Fixel Display', sans-serif;
+}
 @font-face {
   font-family: 'Fixel Text';
   src: url('/fonts/FixelText-Black.woff2') format('woff2');

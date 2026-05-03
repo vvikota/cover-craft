@@ -1,21 +1,23 @@
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import { Header } from './components/Header'
 import { Applications } from './pages/Applications'
+import { EditApplication } from './pages/EditApplication'
+import { ROUTES } from './routes'
 
-const TOTAL_STEPS = 5
-const CURRENT_STEP = 3
+const COVER_LETTERS_GOAL = 5
 
 function App() {
   return (
     <BrowserRouter>
       <div className="min-h-screen bg-white">
-        <Header totalSteps={TOTAL_STEPS} currentStep={CURRENT_STEP} />
+        <Header coverLettersGoal={COVER_LETTERS_GOAL} />
         <Routes>
           <Route
-            path="/applications"
-            element={<Applications totalSteps={TOTAL_STEPS} currentStep={CURRENT_STEP} />}
+            path={ROUTES.APPLICATIONS}
+            element={<Applications coverLettersGoal={COVER_LETTERS_GOAL} />}
           />
-          <Route path="*" element={<Navigate to="/applications" replace />} />
+          <Route path={ROUTES.EDIT_APPLICATION} element={<EditApplication />} />
+          <Route path="*" element={<Navigate to={ROUTES.APPLICATIONS} replace />} />
         </Routes>
       </div>
     </BrowserRouter>

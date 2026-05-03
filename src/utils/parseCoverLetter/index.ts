@@ -1,0 +1,1 @@
+export { parseCoverLetter } from './parseCoverLetter'
