@@ -1,6 +1,10 @@
 @import 'tailwindcss';
 @import './variables.css';
 
+@theme {
+  --breakpoint-sm: 870px;
+}
+
 /* ─── Fixel Display ─────────────────────────────────────────────────────── */
 @font-face {
   font-family: 'Fixel Display';

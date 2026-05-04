@@ -11,12 +11,10 @@ export function GoalBanner({ coverLettersGoal, coverLettersGenerated }: GoalBann
   const navigate = useNavigate()
 
   return (
-    <div className="rounded-2xl p-8" style={{ backgroundColor: 'var(--light-green)' }}>
-      <div className="mx-auto max-w-sm rounded-xl px-8 py-6 text-center">
-        <h2 className="mb-2 font-semibold text-gray-900" style={{ fontSize: '36px' }}>
-          Hit your goal
-        </h2>
-        <p className="mb-5 text-lg text-gray-500">
+    <div className="rounded-2xl p-4 sm:p-8" style={{ backgroundColor: 'var(--light-green)' }}>
+      <div className="mx-auto max-w-sm rounded-xl px-4 py-5 text-center sm:px-8 sm:py-6">
+        <h2 className="mb-2 text-2xl font-semibold text-gray-900 sm:text-4xl">Hit your goal</h2>
+        <p className="mb-5 text-base text-gray-500 sm:text-lg">
           Generate and send out couple more job applications today to get hired faster
         </p>
 

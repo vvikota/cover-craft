@@ -21,13 +21,13 @@ export function Header({ coverLettersGoal }: HeaderProps) {
   }, [])
 
   return (
-    <header className="flex items-center justify-between border-b border-gray-100 px-8 py-4">
+    <header className="flex items-center justify-between px-4 py-3 sm:px-8 sm:py-4">
       <div className="flex items-center">
-        <img src="/icons/logo.svg" alt="logo" height={48} />
+        <img src="/icons/logo.svg" alt="logo" height={40} className="sm:h-12" />
       </div>
 
-      <div className="flex items-center gap-3">
-        <span className="text-sm text-gray-500">
+      <div className="flex items-center gap-2 sm:gap-3">
+        <span className="hidden text-sm text-gray-500 sm:inline">
           {coverLettersGenerated}/{coverLettersGoal} applications generated
         </span>
 
@@ -40,7 +40,7 @@ export function Header({ coverLettersGoal }: HeaderProps) {
             {Array.from({ length: coverLettersGoal }).map((_, i) => (
               <span
                 key={i}
-                className={`block h-2.5 w-2.5 rounded-full ${i < coverLettersGenerated ? 'bg-gray-800' : 'bg-gray-300'}`}
+                className={`block h-2 w-2 rounded-full sm:h-2.5 sm:w-2.5 ${i < coverLettersGenerated ? 'bg-gray-800' : 'bg-gray-300'}`}
               />
             ))}
           </div>

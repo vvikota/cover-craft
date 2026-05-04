@@ -20,11 +20,12 @@ export function Applications({ coverLettersGoal }: ApplicationsProps) {
   }
 
   return (
-    <main className="mx-auto px-8 py-8" style={{ maxWidth: 'var(--content-width)' }}>
-      <div className="mb-6 flex items-center justify-between">
-        <h1 className="font-semibold text-gray-900" style={{ fontSize: '48px' }}>
-          Applications
-        </h1>
+    <main
+      className="mx-auto px-4 py-6 sm:px-8 sm:py-8"
+      style={{ maxWidth: 'var(--content-width)' }}
+    >
+      <div className="mb-6 flex items-center justify-between border-b border-gray-100 pb-4">
+        <h1 className="text-3xl font-semibold text-gray-900 sm:text-5xl">Applications</h1>
         <Button
           text="Create New"
           size="medium"
@@ -34,7 +35,7 @@ export function Applications({ coverLettersGoal }: ApplicationsProps) {
         />
       </div>
 
-      <div className="mb-6 grid grid-cols-2 gap-4">
+      <div className="mb-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
         {applications.map((app) => (
           <ApplicationCard key={app.id} id={app.id} text={app.text} onDelete={handleDelete} />
         ))}

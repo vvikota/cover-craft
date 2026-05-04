@@ -16,7 +16,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(({ label, id, ...p
         id={id}
         ref={ref}
         {...props}
-        className="rounded-lg border border-gray-300 px-3 py-2 text-sm text-gray-900 placeholder-gray-400 outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+        className="rounded-[var(--control-border-radius)] border border-gray-300 px-3 py-2 text-sm text-gray-900 placeholder-gray-400 outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
       />
     </div>
   )
