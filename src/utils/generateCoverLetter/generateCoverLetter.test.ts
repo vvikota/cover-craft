@@ -32,8 +32,6 @@ describe('generateCoverLetter', () => {
 
   it('does not include empty additional details line', () => {
     const result = generateCoverLetter('Acme', 'Engineer', 'TypeScript', '', FIELD_WIDTH)
-    const lines = result.split('\n')
-    // Last lines are standard closing, empty additionalDetails line is not added
     expect(result).not.toMatch(/\n\n\n/)
   })
 
