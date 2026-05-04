@@ -18,29 +18,37 @@ export function useCoverLetter(reset: () => void, fieldWidth: number) {
   const [isLoading, setIsLoading] = useState(false)
   const [showBanner, setShowBanner] = useState(false)
   const [coverLettersCount, setCoverLettersCount] = useState(0)
+  const [error, setError] = useState<string | null>(null)
 
   async function onSubmit(data: FormValues) {
     setIsLoading(true)
-    await new Promise((resolve) => setTimeout(resolve, 3000))
-    const safeFieldWidth = Number.isFinite(fieldWidth)
-      ? Math.max(MIN_LETTER_FIELD_WIDTH, Math.floor(fieldWidth))
-      : MIN_LETTER_FIELD_WIDTH
-    const letter = generateCoverLetter(
-      data.company,
-      data.jobTitle,
-      data.skills,
-      data.details,
-      safeFieldWidth
-    )
-    setGeneratedLetter(letter)
-    saveApplication(letter)
-    setCopied(false)
-    setIsLoading(false)
+    setError(null)
+    try {
+      await new Promise((resolve) => setTimeout(resolve, 3000))
+      const safeFieldWidth = Number.isFinite(fieldWidth)
+        ? Math.max(MIN_LETTER_FIELD_WIDTH, Math.floor(fieldWidth))
+        : MIN_LETTER_FIELD_WIDTH
+      const letter = generateCoverLetter(
+        data.company,
+        data.jobTitle,
+        data.skills,
+        data.details,
+        safeFieldWidth
+      )
+      setGeneratedLetter(letter)
+      saveApplication(letter, data)
+      setCopied(false)
 
-    const count = getApplications().length
-    setCoverLettersCount(count)
-    if (count < COVER_LETTERS_GOAL) {
-      setShowBanner(true)
+      const count = getApplications().length
+      setCoverLettersCount(count)
+      if (count < COVER_LETTERS_GOAL) {
+        setShowBanner(true)
+      }
+    } catch (err) {
+      console.error('Failed to generate cover letter:', err)
+      setError('Something went wrong. Please try again.')
+    } finally {
+      setIsLoading(false)
     }
   }
 
@@ -56,6 +64,7 @@ export function useCoverLetter(reset: () => void, fieldWidth: number) {
     setGeneratedLetter('')
     setCopied(false)
     setShowBanner(false)
+    setError(null)
   }
 
   return {
@@ -65,6 +74,7 @@ export function useCoverLetter(reset: () => void, fieldWidth: number) {
     showBanner,
     coverLettersCount,
     coverLettersGoal: COVER_LETTERS_GOAL,
+    error,
     onSubmit,
     handleCopy,
     handleTryAgain,

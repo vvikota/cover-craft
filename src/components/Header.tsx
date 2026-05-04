@@ -31,7 +31,7 @@ export function Header({ coverLettersGoal }: HeaderProps) {
           {coverLettersGenerated}/{coverLettersGoal} applications generated
         </span>
 
-        {coverLettersGenerated >= 5 ? (
+        {coverLettersGenerated >= coverLettersGoal ? (
           <div className="flex h-7 w-7 items-center justify-center rounded-full bg-green-100">
             <img src="/icons/check.svg" alt="check icon" className="h-4 w-4" />
           </div>

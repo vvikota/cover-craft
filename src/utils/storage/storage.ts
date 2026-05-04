@@ -2,6 +2,12 @@ export interface Application {
   id: string
   text: string
   createdAt: string
+  formValues?: {
+    jobTitle: string
+    company: string
+    skills: string
+    details: string
+  }
 }
 
 const STORAGE_KEY = 'cover-craft-applications'
@@ -19,12 +25,20 @@ function dispatchStorageUpdated() {
   window.dispatchEvent(new Event('storage-updated'))
 }
 
-export function saveApplication(text: string): Application {
+interface FormValues {
+  jobTitle: string
+  company: string
+  skills: string
+  details: string
+}
+
+export function saveApplication(text: string, formValues?: FormValues): Application {
   const applications = getApplications()
   const newApp: Application = {
     id: crypto.randomUUID(),
     text,
     createdAt: new Date().toISOString(),
+    formValues,
   }
   applications.unshift(newApp)
   localStorage.setItem(STORAGE_KEY, JSON.stringify(applications))

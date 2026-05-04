@@ -16,7 +16,7 @@ interface FormValues {
   details: string
 }
 
-export function EditApplication() {
+export function CreateApplication() {
   const [fieldWidth, setFieldWidth] = useState(DEFAULT_LETTER_FIELD_WIDTH)
   const {
     register,
@@ -41,6 +41,7 @@ export function EditApplication() {
     showBanner,
     coverLettersCount,
     coverLettersGoal,
+    error,
     onSubmit,
     handleCopy,
     handleTryAgain,
@@ -146,6 +147,7 @@ export function EditApplication() {
                 {isLoading ? <Spinner /> : 'Generate Now'}
               </button>
             )}
+            {error && <p className="text-sm text-red-600">{error}</p>}
           </form>
         </div>
 

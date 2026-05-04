@@ -24,7 +24,7 @@ export function GoalBanner({ coverLettersGoal, coverLettersGenerated }: GoalBann
             size="large"
             icon="/icons/plus.svg"
             iconAlt="plus icon"
-            onClick={() => navigate(ROUTES.EDIT_APPLICATION)}
+            onClick={() => navigate(ROUTES.CREATE_APPLICATION)}
           />
         </div>
 

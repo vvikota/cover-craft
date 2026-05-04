@@ -2,7 +2,7 @@ import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import { ErrorBoundary } from './components/ErrorBoundary'
 import { Header } from './components/Header'
 import { Applications } from './pages/Applications'
-import { EditApplication } from './pages/EditApplication'
+import { CreateApplication } from './pages/CreateApplication'
 import { ROUTES } from './routes'
 
 const COVER_LETTERS_GOAL = 5
@@ -18,7 +18,7 @@ function App() {
               path={ROUTES.APPLICATIONS}
               element={<Applications coverLettersGoal={COVER_LETTERS_GOAL} />}
             />
-            <Route path={ROUTES.EDIT_APPLICATION} element={<EditApplication />} />
+            <Route path={ROUTES.CREATE_APPLICATION} element={<CreateApplication />} />
             <Route path="*" element={<Navigate to={ROUTES.APPLICATIONS} replace />} />
           </Routes>
         </div>

@@ -1,4 +1,4 @@
 export const ROUTES = {
   APPLICATIONS: '/applications',
-  EDIT_APPLICATION: '/edit-application',
+  CREATE_APPLICATION: '/applications/new',
 } as const

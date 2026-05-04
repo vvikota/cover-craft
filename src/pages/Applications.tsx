@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ApplicationCard } from '../components/ApplicationCard'
 import { Button } from '../components/Button'
@@ -14,7 +14,19 @@ export function Applications({ coverLettersGoal }: ApplicationsProps) {
   const navigate = useNavigate()
   const [applications, setApplications] = useState(getApplications)
 
+  useEffect(() => {
+    function handleStorageUpdated() {
+      setApplications(getApplications())
+    }
+
+    window.addEventListener('storage-updated', handleStorageUpdated)
+    return () => window.removeEventListener('storage-updated', handleStorageUpdated)
+  }, [])
+
   function handleDelete(id: string) {
+    const shouldDelete = window.confirm('Delete this application? This action cannot be undone.')
+    if (!shouldDelete) return
+
     deleteApplication(id)
     setApplications(getApplications())
   }
@@ -31,17 +43,19 @@ export function Applications({ coverLettersGoal }: ApplicationsProps) {
           size="medium"
           icon="/icons/plus.svg"
           iconAlt="plus icon"
-          onClick={() => navigate(ROUTES.EDIT_APPLICATION)}
+          onClick={() => navigate(ROUTES.CREATE_APPLICATION)}
         />
       </div>
 
-      <div className="mb-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
-        {applications.map((app) => (
-          <ApplicationCard key={app.id} id={app.id} text={app.text} onDelete={handleDelete} />
-        ))}
-      </div>
+      {applications.length > 0 && (
+        <div className="mb-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
+          {applications.map((app) => (
+            <ApplicationCard key={app.id} id={app.id} text={app.text} onDelete={handleDelete} />
+          ))}
+        </div>
+      )}
 
-      {applications.length < 5 && (
+      {applications.length < coverLettersGoal && (
         <GoalBanner
           coverLettersGoal={coverLettersGoal}
           coverLettersGenerated={applications.length}
