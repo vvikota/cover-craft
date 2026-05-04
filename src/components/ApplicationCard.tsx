@@ -21,8 +21,10 @@ export function ApplicationCard({ id, text, onDelete }: ApplicationCardProps) {
   return (
     <div className="flex flex-col justify-between rounded-[12px] bg-gray-100 p-5">
       <div className="relative mb-4 overflow-hidden">
-        <p className="mb-2 text-[18px] font-normal text-[var(--color-gray-500)]">{greeting}</p>
-        <p className="line-clamp-4 text-[18px] font-normal leading-relaxed text-[var(--color-gray-500)]">
+        <p className="mb-2 break-words text-[18px] font-normal text-[var(--color-gray-500)]">
+          {greeting}
+        </p>
+        <p className="line-clamp-4 break-words text-[18px] font-normal leading-relaxed text-[var(--color-gray-500)]">
           {body}
         </p>
         <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-gray-100 to-transparent" />

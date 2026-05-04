@@ -36,8 +36,8 @@ export function Applications({ coverLettersGoal }: ApplicationsProps) {
       className="mx-auto px-4 py-6 sm:px-8 sm:py-8"
       style={{ maxWidth: 'var(--content-width)' }}
     >
-      <div className="mb-6 flex items-center justify-between border-b border-gray-100 pb-4">
-        <h1 className="text-3xl font-semibold text-gray-900 sm:text-5xl">Applications</h1>
+      <div className="mb-6 flex min-w-0 flex-wrap items-center justify-between gap-3 border-b border-gray-100 pb-4">
+        <h1 className="min-w-0 text-3xl font-semibold text-gray-900 sm:text-5xl">Applications</h1>
         <Button
           text="Create New"
           size="medium"

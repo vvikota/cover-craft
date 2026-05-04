@@ -11,7 +11,7 @@ function App() {
   return (
     <ErrorBoundary>
       <BrowserRouter>
-        <div className="min-h-screen bg-white">
+        <div className="min-h-screen min-w-0 bg-white">
           <Header coverLettersGoal={COVER_LETTERS_GOAL} />
           <Routes>
             <Route

@@ -21,12 +21,16 @@ export function Header({ coverLettersGoal }: HeaderProps) {
   }, [])
 
   return (
-    <header className="flex items-center justify-between px-4 py-3 sm:px-8 sm:py-4">
-      <div className="flex items-center">
-        <img src="/icons/logo.svg" alt="logo" height={40} className="sm:h-12" />
+    <header className="flex min-w-0 items-center justify-between gap-2 px-4 py-3 sm:gap-3 sm:px-8 sm:py-4">
+      <div className="flex min-w-0 shrink items-center">
+        <img
+          src="/icons/logo.svg"
+          alt="logo"
+          className="h-10 w-auto max-w-full object-contain object-left sm:h-12"
+        />
       </div>
 
-      <div className="flex items-center gap-2 sm:gap-3">
+      <div className="flex shrink-0 items-center gap-2 sm:gap-3">
         <span className="hidden text-sm text-gray-500 sm:inline">
           {coverLettersGenerated}/{coverLettersGoal} applications generated
         </span>

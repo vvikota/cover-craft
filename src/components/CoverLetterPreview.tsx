@@ -52,13 +52,15 @@ export function CoverLetterPreview({
   return (
     <div
       ref={containerRef}
-      className="flex h-full flex-1 flex-col justify-between rounded-xl p-6"
+      className="flex h-full min-w-0 w-full flex-1 flex-col justify-between rounded-xl p-6"
       style={{ backgroundColor: 'var(--color-gray-100)', minHeight: 'clamp(240px, 50vw, 480px)' }}
     >
       {isLoading ? (
         <EllipseLoader />
       ) : generatedLetter ? (
-        <p className="whitespace-pre-wrap text-sm text-gray-900">{generatedLetter}</p>
+        <p className="min-w-0 whitespace-pre-wrap break-words text-sm text-gray-900 [overflow-wrap:anywhere]">
+          {generatedLetter}
+        </p>
       ) : (
         <p className="text-sm text-gray-400">
           Your personalized job application will appear here...
