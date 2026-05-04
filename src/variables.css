@@ -1,5 +1,10 @@
 :root {
   --color-gray-900: #101828;
+  --color-gray-700: #374151;
+  --color-gray-400: #9ca3af;
+  --color-gray-300: #d1d5db;
+  --color-gray-100: #f2f4f7;
+  --color-white: #fff;
   --dark-green: #087443;
   --light-green: #edfcf2;
 

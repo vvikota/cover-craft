@@ -1,12 +1,14 @@
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { generateCoverLetter } from '../utils/generateCoverLetter'
-import { saveApplication } from '../utils/storage'
+import { getApplications, saveApplication } from '../utils/storage'
 import { Input } from '../components/Input'
 import { Spinner } from '../components/Spinner'
 import { CoverLetterPreview } from '../components/CoverLetterPreview'
+import { GoalBanner } from '../components/GoalBanner'
 
 const MAX_DETAILS_LENGTH = 1200
+const COVER_LETTERS_GOAL = 5
 
 interface FormValues {
   jobTitle: string
@@ -19,11 +21,14 @@ export function EditApplication() {
   const [generatedLetter, setGeneratedLetter] = useState('')
   const [copied, setCopied] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
+  const [showBanner, setShowBanner] = useState(false)
+  const [coverLettersCount, setCoverLettersCount] = useState(0)
 
   const {
     register,
     handleSubmit,
     watch,
+    reset,
     formState: { isValid },
   } = useForm<FormValues>({
     mode: 'onChange',
@@ -47,6 +52,12 @@ export function EditApplication() {
     saveApplication(letter)
     setCopied(false)
     setIsLoading(false)
+
+    const count = getApplications().length
+    setCoverLettersCount(count)
+    if (count < COVER_LETTERS_GOAL) {
+      setShowBanner(true)
+    }
   }
 
   async function handleCopy() {
@@ -55,6 +66,15 @@ export function EditApplication() {
     setCopied(true)
     setTimeout(() => setCopied(false), 2000)
   }
+
+  function handleTryAgain() {
+    reset()
+    setGeneratedLetter('')
+    setCopied(false)
+    setShowBanner(false)
+  }
+
+  const isCompleted = !!generatedLetter && !isLoading
 
   return (
     <main className="mx-auto px-8 py-8" style={{ maxWidth: 'var(--content-width)' }}>
@@ -112,22 +132,49 @@ export function EditApplication() {
             </span>
           </div>
 
-          <button
-            type="submit"
-            disabled={!isValid || isLoading}
-            className="w-full rounded-lg py-3 text-sm font-semibold transition-colors"
-            style={{
-              backgroundColor: isValid && !isLoading ? 'var(--dark-green)' : '#d1d5db',
-              color: isValid && !isLoading ? '#fff' : '#9ca3af',
-              cursor: isValid && !isLoading ? 'pointer' : 'not-allowed',
-            }}
-          >
-            {isLoading ? <Spinner /> : 'Generate Now'}
-          </button>
+          {isCompleted ? (
+            <button
+              type="button"
+              onClick={handleTryAgain}
+              className="inline-flex w-full cursor-pointer items-center justify-center gap-2 rounded-lg border border-gray-200 bg-white py-3 text-sm font-semibold text-gray-900 transition-colors hover:bg-gray-50"
+            >
+              <img src="/icons/refresh.svg" alt="refresh icon" width={16} height={16} />
+              Try Again
+            </button>
+          ) : (
+            <button
+              type="submit"
+              disabled={!isValid || isLoading}
+              className="w-full rounded-lg py-3 text-sm font-semibold"
+              style={{
+                backgroundColor:
+                  isValid && !isLoading ? 'var(--dark-green)' : 'var(--color-gray-300)',
+                color: isValid && !isLoading ? 'var(--color-white)' : 'var(--color-gray-400)',
+                cursor: isValid && !isLoading ? 'pointer' : 'not-allowed',
+                transition: 'background-color 0.2s, color 0.2s',
+              }}
+            >
+              {isLoading ? <Spinner /> : 'Generate Now'}
+            </button>
+          )}
         </form>
 
-        <CoverLetterPreview generatedLetter={generatedLetter} copied={copied} onCopy={handleCopy} />
+        <CoverLetterPreview
+          generatedLetter={generatedLetter}
+          copied={copied}
+          isLoading={isLoading}
+          onCopy={handleCopy}
+        />
       </div>
+
+      {showBanner && (
+        <div className="mt-8">
+          <GoalBanner
+            coverLettersGoal={COVER_LETTERS_GOAL}
+            coverLettersGenerated={coverLettersCount}
+          />
+        </div>
+      )}
     </main>
   )
 }
